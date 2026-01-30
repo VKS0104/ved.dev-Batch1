@@ -2,7 +2,7 @@ const input = document.getElementsByClassName("Search-Bar")[0];
 const btn = document.getElementsByClassName("btn")[0];
 
 btn.addEventListener("click", function () {
-    const location = input.value;
+    const location = input.value.trim();
     console.log(location);
 
     input.value = "";
