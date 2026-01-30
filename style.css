@@ -1,0 +1,64 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+    margin:0;
+}
+
+header{
+    display: flex;
+    background-color:#80899e;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #325559;
+    height: calc(100vh - 100px);
+    color: white;
+}
+
+.weather{
+    display: flex;
+    gap: 10px;
+} 
+.weather-image{
+    border-radius: 12px;
+    height:100px
+}
+
+.city{
+    font-size: xx-large;
+}
+.temp{
+    font-size: 24px;
+}
+.weather-condition{
+    text-align: center;
+    font-size: larger;
+}
+
+.btn{
+    background-color: white;
+    padding: 1px;
+    border: none;
+    border-radius: 2px;
+    font-size: small;
+}
+
+.Search-Bar{
+    background-color: #80899e;
+    border: 1px solid black;
+    border-radius: 2px;
+    color: white;
+    width: 200px;
+} 
+.Search-Bar::placeholder{
+    color: white;
+    padding: 12px;
+}
