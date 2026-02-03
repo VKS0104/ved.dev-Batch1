@@ -2,41 +2,132 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather — Live</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-
     <header>
-        <div class="input-container">
-            <input type="text" placeholder="Enter Location..." class="Search-Bar">
-            <button class="btn">Search</button>
+        <div class="container">
+            <div class="brand">
+                <!-- Modern Weather Logo: Sun behind Cloud -->
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sun rays -->
+                    <g class="logo-sun-rays">
+                        <path d="M24 8V4" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M24 44V40" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M40 24H44" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M4 24H8" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M37.66 10.34L40.48 7.52" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M7.52 40.48L10.34 37.66" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M37.66 37.66L40.48 40.48" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M7.52 7.52L10.34 10.34" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" />
+                    </g>
+                    <!-- Sun circle -->
+                    <circle cx="24" cy="20" r="8" fill="#FCD34D" />
+                    <!-- Cloud -->
+                    <path
+                        d="M34 26C34 26 34 26 34 26C36.7614 26 39 28.2386 39 31C39 33.7614 36.7614 36 34 36H16C12.6863 36 10 33.3137 10 30C10 26.6863 12.6863 24 16 24C16 24 16 24 16 24C16 19.5817 19.5817 16 24 16C28.4183 16 32 19.5817 32 24C32 24.3453 31.9827 24.6863 31.9489 25.0223C32.6149 25.3375 33.2011 25.7678 33.6841 26.2891C33.7921 26.1949 33.8929 26.0955 34 26Z"
+                        fill="#E0E7FF" />
+                    <path
+                        d="M34 26C34 26 34 26 34 26C36.7614 26 39 28.2386 39 31C39 33.7614 36.7614 36 34 36H16C12.6863 36 10 33.3137 10 30C10 26.6863 12.6863 24 16 24C16 24 16 24 16 24C16 19.5817 19.5817 16 24 16C28.4183 16 32 19.5817 32 24"
+                        stroke="#C7D2FE" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <span class="title">Weather</span>
+            </div>
+
+            <div class="input-container">
+                <input type="text" placeholder="Enter city" class="Search-Bar" />
+                <button class="btn">Search</button>
+            </div>
         </div>
     </header>
+
     <main>
-        <div class="weather">
-            <div class="temp">12.5℃</div>
-            <div>
-                <div class="city">
-                    Delhi
-                </div>
-                <div class="date-time">
-                    <span class="time">9:16</span>
-                    <span class="day">Friday</span>
-                    <span class="date">2025-XX-XX</span>
+        <!-- Error notification -->
+        <div id="error-notification" class="error-notification hidden">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2" />
+                <path d="M12 8V12" stroke="#EF4444" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="16" r="1" fill="#EF4444" />
+            </svg>
+            <div class="error-content">
+                <div class="error-title">Location Not Found</div>
+                <div class="error-message">Please enter a valid city name or location.</div>
+            </div>
+            <button class="error-close"
+                onclick="document.getElementById('error-notification').classList.add('hidden')">×</button>
+        </div>
+
+        <section class="card">
+            <div class="left">
+                <div id="temp" class="temperature">24°C</div>
+                <div id="city" class="city">San Francisco</div>
+
+                <div class="meta">
+                    <span id="time">2:30 PM</span>
+                    <span id="day">Monday</span>
+                    <span id="date">Feb 3, 2026</span>
                 </div>
             </div>
-            <div class="weather-status">
-                <div class="icon">
-                    <img src="./download.jpg" alt="" class="weather-image">
+
+            <div class="right">
+                <div class="icon-wrap">
+                    <!-- Animated SVG Sun Icon -->
+                    <svg class="weather-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sun rays (outer) -->
+                        <g class="sun-rays">
+                            <line x1="100" y1="20" x2="100" y2="40" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="100" y1="160" x2="100" y2="180" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="20" y1="100" x2="40" y2="100" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="160" y1="100" x2="180" y2="100" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="35" y1="35" x2="50" y2="50" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="150" y1="150" x2="165" y2="165" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="165" y1="35" x2="150" y2="50" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                            <line x1="50" y1="150" x2="35" y2="165" stroke="#FBBF24" stroke-width="4"
+                                stroke-linecap="round" />
+                        </g>
+
+                        <!-- Sun circle with gradient -->
+                        <defs>
+                            <radialGradient id="sunGradient" cx="50%" cy="50%">
+                                <stop offset="0%" style="stop-color:#FCD34D;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+                            </radialGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <circle cx="100" cy="100" r="45" fill="url(#sunGradient)" filter="url(#glow)" />
+                    </svg>
                 </div>
-                <div class="weather-condition">Sunny</div>
+                <div id="weather-condition" class="condition">Partly Cloudy</div>
             </div>
+        </section>
+
+        <div class="attribution">
+            Data provided by <a href="https://www.weatherapi.com/" target="_blank" rel="noopener">WeatherAPI.com</a>
         </div>
     </main>
+
     <script src="./script.js"></script>
 </body>
 
